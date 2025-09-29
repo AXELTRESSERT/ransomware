@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM ALERT</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            box-shadow: 0 0 20px #ff0000;
+            background-color: #111;
+        }
+        
+        h1 {
+            font-size: 28px;
+            text-shadow: 0 0 10px #ff0000;
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            background-color: #220000;
+            border: 1px solid #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .timer {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 30px 0;
+            text-shadow: 0 0 15px #ff0000;
+        }
+        
+        .pin-box {
+            margin: 30px auto;
+            width: 200px;
+        }
+        
+        .pin-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #000;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .submit-btn {
+            background-color: #ff0000;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .submit-btn:hover {
+            background-color: #cc0000;
+        }
+        
+        .file-list {
+            text-align: left;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #220000;
+            border: 1px solid #ff0000;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            padding: 5px;
+            border-bottom: 1px dashed #ff0000;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #220000;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .alert button {
+            background-color: #ff0000;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RANSOMWARE BY 𝗖𝗟𝗢𝗡𝗘𝟳𝟳𝟳 𝗡𝗘𝗪 ERA</h1>
+        
+        <div class="warning">
+            <p>YOUR FILES HAVE BEEN ENCRYPTED!</p>
+            <p>Silakan bayar 1000$ ke paypal developer jika ingin decrypt ransomware</p>
+        </div>
+        
+        <div class="warning">
+            <p>MOHON TIDAK MEMATIKAN HP ATAU CLOSE ATAU 1 FILE AKAN HILANG</p>
+        </div>
+        
+        <div class="timer" id="countdown">24:00:00</div>
+        
+        <div class="pin-box">
+            <input type="password" class="pin-input" id="pinInput" placeholder="Enter PIN">
+            <button class="submit-btn" onclick="checkPin()">SUBMIT</button>
+        </div>
+        
+        <div class="file-list" id="fileList">
+            <div class="file-item">android_system</div>
+            <div class="file-item">android_pin</div>
+            <div class="file-item">android_crash</div>
+            <div class="file-item">android_shell</div>
+            <div class="file-item">8159517</div>
+            <div class="file-item">album_colection</div>
+            <div class="file-item">bokep_sd</div>
+            <div class="file-item">system_start_android</div>
+            <div class="file-item">admroid_start</div>
+            <div class="file-item">android_system</div>
+        </div>
+        
+        <div class="warning">
+            <p>SETIAP SANDI SALAH MAKA FILE TERHAPUS 1</p>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 𝗖𝗟𝗢𝗡𝗘𝟳𝟳𝟳 𝗡𝗘𝗪 ERA - All Rights Reserved</p>
+        </div>
+    </div>
+    
+    <div class="alert" id="alertBox">
+        <p id="alertMessage">PIN SALAH! 1 FILE TERHAPUS</p>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+
+    <script>
+        // Timer countdown
+        let totalSeconds = 24 * 60 * 60; // 24 hours in seconds
+        
+        function updateTimer() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (totalSeconds > 0) {
+                totalSeconds--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                document.getElementById('countdown').textContent = "TIME'S UP!";
+                // Add logic for when timer reaches zero
+            }
+        }
+        
+        // Start the timer
+        updateTimer();
+        
+        // File list
+        const files = [
+            "android_system",
+            "android_pin", 
+            "android_crash",
+            "android_shell",
+            "8159517",
+            "album_colection",
+            "bokep_sd",
+            "system_start_android",
+            "admroid_start",
+            "android_system"
+        ];
+        
+        let remainingFiles = [...files];
+        
+        // Check PIN function
+        function checkPin() {
+            const pinInput = document.getElementById('pinInput');
+            const pin = pinInput.value;
+            
+            // Correct PIN (you can change this)
+            const correctPin = "7777";
+            
+            if (pin === correctPin) {
+                // If correct PIN, show success message
+                showAlert("PIN BENAR! FILE ANDA AKAN DI-DECRYPT");
+            } else {
+                // If wrong PIN, delete one file
+                if (remainingFiles.length > 0) {
+                    const deletedFile = remainingFiles.pop();
+                    showAlert("PIN SALAH! 1 FILE TERHAPUS: " + deletedFile);
+                    updateFileList();
+                } else {
+                    showAlert("SEMUA FILE SUDAH TERHAPUS!");
+                }
+            }
+            
+            pinInput.value = "";
+        }
+        
+        // Update file list display
+        function updateFileList() {
+            const fileListElement = document.getElementById('fileList');
+            fileListElement.innerHTML = '';
+            
+            remainingFiles.forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.textContent = file;
+                fileListElement.appendChild(fileItem);
+            });
+        }
+        
+        // Show alert
+        function showAlert(message) {
+            document.getElementById('alertMessage').textContent = message;
+            document.getElementById('alertBox').style.display = 'block';
+        }
+        
+        // Close alert
+        function closeAlert() {
+            document.getElementById('alertBox').style.display = 'none';
+        }
+        
+        // Allow Enter key to submit PIN
+        document.getElementById('pinInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPin();
+            }
+        });
+    </script>
+</body>
+          </html>
